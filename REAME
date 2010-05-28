@@ -1,0 +1,33 @@
+pmDeploymentToolsPlugin
+=======================
+
+  The `pmDeploymentToolsPlugin` provides several tasks that would help you to deploy your projects.
+These tasks are helpful on project upgrades.
+
+Installation
+------------
+
+  * Install the plugin
+
+      [bash]
+      $ ./symfony pl:i pmDeploymentToolsPlugin
+
+Upgrade your project
+--------------------
+
+  * Prepare the project for beign upgraded (ie. from version 1.0.0 to 1.0.1)
+
+      [bash]
+      $ ./symfony deployment:prepare
+
+  * Patch the database
+
+      [bash]
+      $ ./symfony deployment:patch --dir=data/patch/1.0.1
+
+      Where dir is the directory where the sql files are.
+
+  * Prepare the project for beign upgraded (ie. from version 1.0.0 to 1.1.1)
+
+      [bash]
+      $ ./symfony deployment:finalize
