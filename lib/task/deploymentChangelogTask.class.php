@@ -40,17 +40,19 @@ EOF;
 
     $xml = simplexml_load_file('/tmp/svn_changelog');
 
+    $data = file_exists('CHANGELOG') ? file_get_contents('CHANGELOG') : '';
+
     $handle = fopen('CHANGELOG', 'w');
 
     $title = date('d/m/Y').": Versión $version\n";
 
     fwrite($handle, $title);
     for ($i = 1; $i <= strlen($title) - 2; $i++) fwrite($handle, "-");
-    fwrite($handle, "\n");
+    fwrite($handle, "\n\n");
 
     if (!empty($message))
     {
-      fwrite($handle, "\n".$message."\n\n");
+      fwrite($handle, $message."\n\n");
     }
 
     foreach ($xml->logentry as $logentry)
@@ -61,6 +63,8 @@ EOF;
       $text = preg_replace('/%%msg%%/', $logentry->{'msg'}, $text);
       fwrite($handle, $text."\n");
     }
+
+    fwrite($handle, "\n\n".$data);
 
     fclose($handle);
   }
